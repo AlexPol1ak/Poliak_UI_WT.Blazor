@@ -1,0 +1,17 @@
+﻿@page "/products"
+@rendermode InteractiveServer
+@using Poliak_UI_WT.Domain.Entities
+
+
+<h3>Products</h3>
+
+@code {
+
+    [Inject] IProductService<Phone> ProductService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetProducts();
+    }
+
+}

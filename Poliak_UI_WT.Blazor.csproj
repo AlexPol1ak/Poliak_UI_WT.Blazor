@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Poliak_UI_WT.Domain\Poliak_UI_WT.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
