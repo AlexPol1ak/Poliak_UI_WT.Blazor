@@ -45,6 +45,7 @@ namespace Poliak_UI_WT.Blazor.Services
                 _totalPages = responseData.Data.TotalPages;
                 _phones = responseData.Data.Items;
                 ListChanged?.Invoke();
+                //DebugHelper.ShowData($"Count Phones {_phones.Count}", _phones[0].ToString());
             }
 
             else
@@ -52,6 +53,7 @@ namespace Poliak_UI_WT.Blazor.Services
                 _phones = null;
                 _currentPage = 1;
                 _totalPages = 1;
+
             }
         }
     }

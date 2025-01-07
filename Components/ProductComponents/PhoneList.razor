@@ -1,0 +1,49 @@
+﻿@using Poliak_UI_WT.Domain.Entities
+@implements IDisposable
+@rendermode InteractiveServer
+
+<h3>Доступные модели</h3>
+@if(ProductService.Products!=null && ProductService.Products.Count()!=0){
+    <table class="table table-striped">
+        <thead>
+            <th>Название</th><th></th>
+            @foreach(var item in ProductService.Products)
+            {
+                <tr>
+                <td>@($"{item.Name} {item.Model}")</td>
+                <td>
+                <button class="btn btn-outline-dark"@onclick="@(()=>OnPhoneSelected(item.PhoneId))">
+                    Подробно
+                </button>
+                </td>
+                </tr>
+            }
+        </thead>
+    </table>
+}else{
+    <h4>Нет данных для отображения</h4>
+}
+
+@code {
+    [CascadingParameter]
+    public IProductService<Phone> ProductService { get; set; }
+
+    [Parameter]
+    public EventCallback<int> PhoneSelected { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductService.ListChanged+=StateHasChanged;
+    }
+
+    public async void OnPhoneSelected(int id)
+    {
+        await PhoneSelected.InvokeAsync(id);
+    }
+    
+    public void Dispose()
+    {
+        ProductService.ListChanged -= StateHasChanged;
+    }
+
+}

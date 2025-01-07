@@ -1,0 +1,21 @@
+﻿@using Poliak_UI_WT.Domain.Entities
+
+@if(Phone !=null)
+{
+    <div class="card mt-5" style="width: 18rem;">
+        <img src="@Phone.Image" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@($"{Phone.Name} {Phone.Model}")</h5>
+            <p class="card-text">@Phone.Description</p>
+            <h4 class="badge bg-info">@Phone.Price BYN</h4>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Phone Phone { get; set; }
+    [Parameter]
+    public EventCallback<Phone> PhoneChanged { get; set; }
+
+}

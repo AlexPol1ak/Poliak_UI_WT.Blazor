@@ -1,17 +1,29 @@
 ﻿@page "/products"
 @rendermode InteractiveServer
 @using Poliak_UI_WT.Domain.Entities
+@using Poliak_UI_WT.Blazor.Components.ProductComponents
 
+<h2>Телефоны</h2>
 
-<h3>Products</h3>
+<CascadingValue Value="ProductService">
+    <PhoneList PhoneSelected="ShowDetails" />
+    <PhoneDetails Phone="SelectedPhone" />
+</CascadingValue>
 
 @code {
 
     [Inject] IProductService<Phone> ProductService { get; set; }
+    [Parameter]
+    public Phone SelectedPhone { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await ProductService.GetProducts();
+    }
+
+    void ShowDetails(int id)
+    {
+        SelectedPhone = ProductService.Products.First(d => d.PhoneId == id);
     }
 
 }

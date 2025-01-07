@@ -10,7 +10,6 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient<IProductService<Phone>, ApiProductService>
     (client => client.BaseAddress = new Uri("https://localhost:7002/api/Phones/"));
-builder.Services.AddScoped<IProductService<Phone>, ApiProductService>();
 
 var app = builder.Build();
 
